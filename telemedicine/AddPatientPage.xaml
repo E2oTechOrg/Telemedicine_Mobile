@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:telemedicine.Components"
+             x:Class="telemedicine.AddPatientPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F5F9FF"
+             Title="AddPatientPage">
+
+    <!-- STYLES -->
+    <ContentPage.Resources>
+
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="FontFamily" Value="Cambria"/>
+            <Setter Property="TextColor" Value="#111827"/>
+            <Setter Property="PlaceholderColor" Value="#9CA3AF"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <Style TargetType="Picker">
+            <Setter Property="FontFamily" Value="Cambria"/>
+            <Setter Property="TitleColor" Value="#9CA3AF"/>
+            <Setter Property="TextColor" Value="#111827"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- MAIN CONTENT -->
+        <ScrollView Grid.Row="0">
+
+            <VerticalStackLayout Padding="20,50,20,120"
+                                 Spacing="22">
+
+                <!-- TOP HEADER -->
+                <Grid ColumnDefinitions="*,Auto">
+
+                    <!-- Doctor Info -->
+                    <HorizontalStackLayout Spacing="12">
+
+                        <!-- Doctor Image -->
+                        <Frame HeightRequest="65"
+                               WidthRequest="65"
+                               Padding="0"
+                               CornerRadius="32.5"
+                               BorderColor="White"
+                               BackgroundColor="White"
+                               HasShadow="True"
+                               Shadow="{Shadow Brush=#90CAF9,
+                                                Offset='0,4',
+                                                Radius=12,
+                                                Opacity=0.25}">
+
+                            <Image Source="doctorprofile.jpg"
+                                   Aspect="AspectFill"/>
+                        </Frame>
+
+                        <!-- Name & Role -->
+                        <VerticalStackLayout VerticalOptions="Center"
+                                             Spacing="2">
+
+                            <Label Text="Dr. John Mathew"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="#111827"/>
+
+                            <Label Text="Cardiologist Specialist"
+                                   FontSize="13"
+                                   TextColor="#6B7280"/>
+
+                        </VerticalStackLayout>
+
+                    </HorizontalStackLayout>
+
+                    <!-- Date -->
+                    <VerticalStackLayout Grid.Column="1"
+                                         HorizontalOptions="End"
+                                         VerticalOptions="Center"
+                                         Spacing="0">
+
+                        <Label Text="Monday"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#1565C0"
+                               HorizontalTextAlignment="End"/>
+
+                        <Label Text="08 Jul 2025"
+                               FontSize="13"
+                               TextColor="#6B7280"
+                               HorizontalTextAlignment="End"/>
+
+                    </VerticalStackLayout>
+
+                </Grid>
+
+                <!-- PAGE TITLE -->
+                <VerticalStackLayout Spacing="4">
+
+                    <Label Text="Add Patient"
+                           FontSize="30"
+                           FontAttributes="Bold"
+                           TextColor="#1565C0"/>
+
+                    <Label Text="Patient Information"
+                           FontSize="15"
+                           TextColor="#6B7280"/>
+
+                </VerticalStackLayout>
+
+                <!-- PROFILE IMAGE -->
+                <VerticalStackLayout HorizontalOptions="Center"
+                     Spacing="10">
+
+                    <!-- IMAGE FRAME -->
+                    <Frame HeightRequest="125"
+           WidthRequest="125"
+           CornerRadius="62"
+           Padding="0"
+           BorderColor="#D6E4FF"
+           BackgroundColor="White"
+           HasShadow="True"
+           Shadow="{Shadow Brush=#BFDBFE,
+                            Offset='0,5',
+                            Radius=15,
+                            Opacity=0.30}">
+
+                        <Grid>
+
+                            <!-- SELECTED IMAGE -->
+                            <Image x:Name="PatientProfileImage"
+                   Source="addphoto.png"
+                   Aspect="AspectFill"/>
+
+                        </Grid>
+
+                    </Frame>
+
+                    <!-- UPLOAD BUTTON -->
+                    <Button Text="Upload Photo"
+            Clicked="UploadPhoto_Clicked"
+            BackgroundColor="#E8F1FF"
+            TextColor="#1565C0"
+            FontSize="14"
+            FontAttributes="Bold"
+            HeightRequest="42"
+            WidthRequest="145"
+            CornerRadius="14"/>
+
+                </VerticalStackLayout>
+
+                <!-- FORM -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="22"
+                       Padding="20"
+                       BorderColor="#E5E7EB"
+                       HasShadow="True"
+                       Shadow="{Shadow Brush=#D6E4FF,
+                                        Offset='0,4',
+                                        Radius=10,
+                                        Opacity=0.15}">
+                    <VerticalStackLayout Spacing="18">
+
+                        <!-- NAME -->
+                        <VerticalStackLayout Spacing="6">
+
+                            <Label Text="Patient Name"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="#374151"/>
+
+                            <Frame x:Name="NameFrame"
+               Padding="14,3"
+               CornerRadius="10"
+               BorderColor="#D1D5DB"
+               BackgroundColor="#F5F9FF"
+               HasShadow="False">
+
+                                <Entry Placeholder="Enter patient name"
+                   BackgroundColor="Transparent"
+                   Focused="Entry_Focused"
+                   Unfocused="Entry_Unfocused"/>
+
+                            </Frame>
+
+                        </VerticalStackLayout>
+
+                        <!-- AGE & GENDER -->
+                        <Grid ColumnDefinitions="*,*"
+          ColumnSpacing="14">
+
+                            <!-- AGE -->
+                            <VerticalStackLayout Grid.Column="0"
+                             Spacing="6">
+
+                                <Label Text="Age"
+                   FontSize="14"
+                   FontAttributes="Bold"
+                   TextColor="#374151"/>
+
+                                <Frame x:Name="AgeFrame"
+                   Padding="14,3"
+                   CornerRadius="10"
+                   BorderColor="#D1D5DB"
+                   BackgroundColor="#F5F9FF"
+                   HasShadow="False">
+
+                                    <Entry Placeholder="Age"
+                       Keyboard="Numeric"
+                       BackgroundColor="Transparent"
+                       Focused="Entry_Focused"
+                       Unfocused="Entry_Unfocused"/>
+
+                                </Frame>
+
+                            </VerticalStackLayout>
+
+                            <!-- GENDER -->
+                            <VerticalStackLayout Grid.Column="1"
+                     Spacing="6">
+
+                                <Label Text="Gender"
+           FontSize="14"
+           FontAttributes="Bold"
+           TextColor="#374151"/>
+
+                                <Frame x:Name="GenderFrame"
+           Padding="14,0"
+           HeightRequest="52"
+           CornerRadius="10"
+           BorderColor="#D1D5DB"
+           BackgroundColor="#F5F9FF"
+           HasShadow="False">
+
+                                    <Picker Title="Select"
+                HeightRequest="50"
+                FontSize="15"
+                VerticalOptions="Center"
+                BackgroundColor="Transparent"
+                Focused="Picker_Focused"
+                Unfocused="Picker_Unfocused">
+
+                                        <Picker.Items>
+                                            <x:String>Male</x:String>
+                                            <x:String>Female</x:String>
+                                            <x:String>Other</x:String>
+                                        </Picker.Items>
+
+                                    </Picker>
+
+                                </Frame>
+
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <!-- MOBILE -->
+                        <VerticalStackLayout Spacing="6">
+
+                            <Label Text="Mobile Number"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="#374151"/>
+
+                            <Frame x:Name="MobileFrame"
+               Padding="14,3"
+               CornerRadius="10"
+               BorderColor="#D1D5DB"
+               BackgroundColor="#F5F9FF"
+               HasShadow="False">
+
+                                <Entry Placeholder="Enter mobile number"
+                   Keyboard="Telephone"
+                   BackgroundColor="Transparent"
+                   Focused="Entry_Focused"
+                   Unfocused="Entry_Unfocused"/>
+
+                            </Frame>
+
+                        </VerticalStackLayout>
+
+                        <!-- EMAIL -->
+                        <VerticalStackLayout Spacing="6">
+
+                            <Label Text="Email Address"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="#374151"/>
+
+                            <Frame x:Name="EmailFrame"
+               Padding="14,3"
+               CornerRadius="10"
+               BorderColor="#D1D5DB"
+               BackgroundColor="#F5F9FF"
+               HasShadow="False">
+
+                                <Entry Placeholder="Enter email"
+                   Keyboard="Email"
+                   BackgroundColor="Transparent"
+                   Focused="Entry_Focused"
+                   Unfocused="Entry_Unfocused"/>
+
+                            </Frame>
+
+                        </VerticalStackLayout>
+
+                        <!-- DOB -->
+                        <VerticalStackLayout Spacing="6">
+
+                            <Label Text="Date of Birth"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="#374151"/>
+
+                            <Frame x:Name="DobFrame"
+               Padding="14,3"
+               CornerRadius="10"
+               BorderColor="#D1D5DB"
+               BackgroundColor="#F5F9FF"
+               HasShadow="False">
+
+                                <DatePicker TextColor="#111827"
+                        BackgroundColor="Transparent"/>
+
+                            </Frame>
+
+                        </VerticalStackLayout>
+
+                        <!-- BLOOD GROUP -->
+                        <VerticalStackLayout Spacing="6">
+
+                            <Label Text="Blood Group"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="#374151"/>
+                            <Frame x:Name="BloodFrame"
+       Padding="14,0"
+       HeightRequest="52"
+       CornerRadius="10"
+       BorderColor="#D1D5DB"
+       BackgroundColor="#F5F9FF"
+       HasShadow="False">
+
+                                <Picker Title="Select Blood Group"
+            HeightRequest="50"
+            FontSize="15"
+            VerticalOptions="Center"
+            BackgroundColor="Transparent"
+            Focused="Picker_Focused"
+            Unfocused="Picker_Unfocused">
+
+                                    <Picker.Items>
+                                        <x:String>A+</x:String>
+                                        <x:String>A-</x:String>
+                                        <x:String>B+</x:String>
+                                        <x:String>B-</x:String>
+                                        <x:String>AB+</x:String>
+                                        <x:String>AB-</x:String>
+                                        <x:String>O+</x:String>
+                                        <x:String>O-</x:String>
+                                    </Picker.Items>
+
+                                </Picker>
+
+                            </Frame>
+                        </VerticalStackLayout>
+
+                        <!-- ADDRESS -->
+                        <VerticalStackLayout Spacing="6">
+
+                            <Label Text="Address"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="#374151"/>
+
+                            <Frame x:Name="AddressFrame"
+               Padding="14,8"
+               CornerRadius="10"
+               BorderColor="#D1D5DB"
+               BackgroundColor="#F5F9FF"
+               HasShadow="False">
+
+                                <Editor Placeholder="Enter address"
+                    HeightRequest="100"
+                    FontFamily="Cambria"
+                    FontSize="15"
+                    TextColor="#111827"
+                    BackgroundColor="Transparent"
+                    PlaceholderColor="#9CA3AF"
+                    Focused="Editor_Focused"
+                    Unfocused="Editor_Unfocused"/>
+
+                            </Frame>
+
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+
+                </Frame>
+
+                <!-- SAVE BUTTON -->
+                <Button Text="Save Patient"
+                        HeightRequest="60"
+                        CornerRadius="30"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        BackgroundColor="#1565C0"
+                        TextColor="White"
+                        Margin="0,5,0,20"
+                        Shadow="{Shadow Brush=#1565C0,
+                                         Offset='0,8',
+                                         Radius=18,
+                                         Opacity=0.35}"/>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <!-- FOOTER -->
+        <components:FooterView Grid.Row="1"/>
+
+    </Grid>
+
+</ContentPage>

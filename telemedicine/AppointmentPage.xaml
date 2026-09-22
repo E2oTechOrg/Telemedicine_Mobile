@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:telemedicine.Components"
+             x:Class="telemedicine.AppointmentPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FBF3F8"
+            >
+
+    <!-- STYLES -->
+    <ContentPage.Resources>
+
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <Grid>
+
+        <Grid RowDefinitions="*,Auto">
+
+            <!-- MAIN CONTENT -->
+            <Grid Grid.Row="0">
+
+                <!-- SCROLL AREA -->
+                <ScrollView>
+
+                    <VerticalStackLayout Padding="20,55,20,120"
+                                     Spacing="18">
+
+                        <!-- TOP HEADER -->
+                        <Grid ColumnDefinitions="*,Auto"
+                          VerticalOptions="Center">
+
+                            <!-- PAGE TITLE -->
+                            <VerticalStackLayout Spacing="2">
+
+                                <Label Text="Appointments"
+                                   FontSize="32"
+                                   FontAttributes="Bold"
+                                   TextColor="#111827"/>
+
+                                <Label Text="Manage your appointment records"
+                                   FontSize="15"
+                                   TextColor="#6B7280"/>
+
+                            </VerticalStackLayout>
+
+                            <!-- TOTAL -->
+                            <Frame Grid.Column="1"
+                               BackgroundColor="#7A2257"
+                               CornerRadius="16"
+                               Padding="16,10"
+                               HasShadow="False"
+                               VerticalOptions="Center">
+
+                                <VerticalStackLayout Spacing="0">
+
+                                    <!-- COUNT -->
+                                    <Label x:Name="AppointmentCountLabel"
+       Text="0"
+       FontSize="20"
+       FontAttributes="Bold"
+       TextColor="White"
+       HorizontalTextAlignment="Center"/>
+
+
+                                    <Label Text="Appointments"
+                                       FontSize="11"
+                                       TextColor="#F5E6EF"
+                                       HorizontalTextAlignment="Center"/>
+
+                                </VerticalStackLayout>
+
+                            </Frame>
+
+                        </Grid>
+
+                        <!-- SEARCH BAR -->
+                        <Frame BackgroundColor="White"
+                           CornerRadius="18"
+                           Padding="15,8"
+                           BorderColor="#E6C3D9"
+                           HasShadow="True"
+                           Shadow="{Shadow Brush=#E3B9D3,
+                                            Offset='0,3',
+                                            Radius=8,
+                                            Opacity=0.12}">
+
+                            <Grid ColumnDefinitions="Auto,*"
+      VerticalOptions="Center">
+
+                                <Image Source="search.png"
+           WidthRequest="20"
+           HeightRequest="20"
+           Opacity="0.7"/>
+
+                                <Entry Grid.Column="1"
+           Placeholder="Search..."
+           PlaceholderColor="#9CA3AF"
+           BackgroundColor="Transparent"
+           Margin="10,0,0,0"
+           FontSize="16"
+           TextColor="#111827"
+           TextChanged="SearchAppointment_TextChanged"/>
+
+                            </Grid>
+
+                        </Frame>
+
+                        <!-- SECTION HEADER -->
+                        <Grid ColumnDefinitions="*,Auto">
+
+                            <Label Text="Appointment's List"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               TextColor="#111827"/>
+
+
+                        </Grid>
+                        <CollectionView x:Name="AppointmentCollection"
+                SelectionMode="None">
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+
+                                    <Frame Margin="0,0,0,14"
+               Padding="16"
+               CornerRadius="22"
+               BackgroundColor="White"
+               BorderColor="#E6C3D9"
+               Shadow="{Shadow Brush=#E3B9D3,
+                                Offset='0,3',
+                                Radius=8,
+                                Opacity=0.12}">
+
+                                        <VerticalStackLayout Spacing="12">
+
+                                            <!-- TOP SECTION -->
+                                            <Grid ColumnDefinitions="70,*,Auto">
+
+                                                <!-- ID -->
+                                                <Frame WidthRequest="60"
+                           HeightRequest="60"
+                           CornerRadius="30"
+                           BackgroundColor="#7A2257"
+                           Padding="0"
+                           HasShadow="False">
+
+                                                    <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Spacing="0">
+
+                                                        <Label Text="ID"
+                                   FontSize="10"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalTextAlignment="Center"/>
+
+                                                        <Label Text="{Binding AppointmentId}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalTextAlignment="Center"/>
+
+                                                    </VerticalStackLayout>
+
+                                                </Frame>
+
+                                                <!-- DETAILS -->
+                                                <VerticalStackLayout Grid.Column="1"
+                                         Margin="10,0,0,0"
+                                         Spacing="4">
+
+                                                    <Label Text="{Binding PatientName}"
+                               FontSize="19"
+                               FontAttributes="Bold"
+                               TextColor="#111827"/>
+
+                                                    <Label FontSize="13"
+                               TextColor="#6B7280">
+
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding Gender}" />
+                                                                <Span Text=" • " />
+                                                                <Span Text="{Binding Age}" />
+                                                                <Span Text=" Years" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+
+                                                    </Label>
+
+                                                    <Label Text="{Binding Phone}"
+                               FontSize="13"
+                               TextColor="#6B7280"/>
+
+                                                    <Label Text="{Binding Email}"
+                               FontSize="12"
+                               TextColor="#9CA3AF"
+                               LineBreakMode="TailTruncation"/>
+
+                                                </VerticalStackLayout>
+
+                                                <!-- DATE -->
+                                                <VerticalStackLayout Grid.Column="2"
+                                         HorizontalOptions="End"
+                                         Spacing="2">
+
+                                                    <Label Text="{Binding Date,StringFormat='{0:dd MMM yyyy}'}"
+                               FontSize="12"
+                               FontAttributes="Bold"
+                               TextColor="#7A2257"
+                               HorizontalTextAlignment="End"/>
+
+                                                    <Label Text="{Binding Date,StringFormat='{0:hh:mm tt}'}"
+                               FontSize="13"
+                               FontAttributes="Bold"
+                               TextColor="#111827"
+                               HorizontalTextAlignment="End"/>
+
+                                                </VerticalStackLayout>
+
+                                            </Grid>
+
+                                            <!-- BOTTOM BUTTONS -->
+                                            <Grid ColumnDefinitions="*,*"
+                      ColumnSpacing="10">
+
+                                                <!-- STATUS -->
+                                                <Button Grid.Column="0"
+        Text="{Binding Status}"
+        HeightRequest="44"
+        CornerRadius="22"
+        FontAttributes="Bold"
+        FontSize="14"
+        BackgroundColor="#F3E1EC"
+        TextColor="#7A2257"
+        CommandParameter="{Binding .}"
+        Clicked="StatusClicked"/>
+                                                <!-- JOIN -->
+                                                <Button Grid.Column="1"
+                            Text="Join Meeting"
+                            HeightRequest="44"
+                            CornerRadius="22"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            BackgroundColor="#7A2257"
+                            TextColor="White"
+                            Clicked="JoinMeetingClicked"/>
+
+                                            </Grid>
+
+                                        </VerticalStackLayout>
+
+                                    </Frame>
+
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+
+                </ScrollView>
+
+
+
+            </Grid>
+
+            <!-- FOOTER -->
+            <components:FooterView  x:Name="Footer" Grid.Row="1"/>
+
+        </Grid>
+
+        <Grid x:Name="LoadingOverlay"
+IsVisible="False"
+BackgroundColor="#804E1638"
+ZIndex="999">
+
+            <ActivityIndicator
+  IsRunning="True"
+  Color="White"
+  WidthRequest="48"
+  HeightRequest="48"
+  HorizontalOptions="Center"
+  VerticalOptions="Center" />
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

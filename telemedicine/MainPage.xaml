@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="telemedicine.MainPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FBF3F8">
+
+    <!-- Global Cambria Font -->
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- Main Content -->
+        <ScrollView>
+            <VerticalStackLayout Padding="30,70,30,30"
+                                 Spacing="28">
+
+                <!-- Top Illustration Area -->
+                <Grid HeightRequest="320">
+
+                    <!-- Main Background Circle -->
+                    <Frame BackgroundColor="#F3E1EC"
+                           CornerRadius="160"
+                           HeightRequest="300"
+                           WidthRequest="300"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           HasShadow="False"
+                           BorderColor="Transparent"/>
+
+                    <!-- Secondary Circle -->
+                    <Frame BackgroundColor="#E6C3D9"
+                           CornerRadius="120"
+                           HeightRequest="230"
+                           WidthRequest="230"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Margin="0,40,0,0"
+                           HasShadow="False"
+                           BorderColor="Transparent"
+                           Opacity="0.7"/>
+
+                    <!-- Doctor Image Container -->
+                    <Frame BackgroundColor="White"
+                           CornerRadius="90"
+                           Padding="25"
+                           HeightRequest="180"
+                           WidthRequest="180"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           HasShadow="True"
+                           Shadow="{Shadow Brush=#C77FA8,
+                                            Offset='0,8',
+                                            Radius=20,
+                                            Opacity=0.35}">
+
+                        <Image Source="bgmlog.png"
+                               Aspect="AspectFit"/>
+                    </Frame>
+
+                </Grid>
+
+                <!-- Welcome Text Section -->
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Welcome to"
+                           FontSize="22"
+                           TextColor="#7A5B6E"
+                           HorizontalTextAlignment="Center"
+                           FontAttributes="Bold"/>
+
+                    <Label Text="BGM Telemedicine"
+                           FontSize="42"
+                           FontAttributes="Bold"
+                           TextColor="#7A2257"
+                           HorizontalTextAlignment="Center"/>
+
+                    <Label Text="Your trusted healthcare companion. Connect with professional doctors anytime, anywhere with secure and fast online consultations."
+                           FontSize="16"
+                           LineHeight="1.6"
+                           TextColor="#8A7280"
+                           HorizontalTextAlignment="Center"/>
+
+                </VerticalStackLayout>
+
+                <!-- Features Section -->
+                <Grid ColumnDefinitions="*,*"
+                      ColumnSpacing="18"
+                      Margin="0,12,0,0">
+
+                    <!-- Feature Card 1 -->
+                    <Frame Grid.Column="0"
+                           BackgroundColor="White"
+                           CornerRadius="24"
+                           Padding="18"
+                           HasShadow="True"
+                           Shadow="{Shadow Brush=#E3B9D3,
+                                            Offset='0,4',
+                                            Radius=12,
+                                            Opacity=0.25}">
+
+                        <VerticalStackLayout Spacing="10">
+
+                            <Frame BackgroundColor="#F5E6EF"
+                                   CornerRadius="18"
+                                   HeightRequest="55"
+                                   WidthRequest="55"
+                                   Padding="12"
+                                   HorizontalOptions="Start"
+                                   BorderColor="Transparent">
+
+                                <Image Source="video_call.png"/>
+                            </Frame>
+
+                            <Label Text="Video Consultation"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   TextColor="#3A1F2E"/>
+
+                            <Label Text="Consult expert doctors online with secure HD video calls."
+                                   FontSize="13"
+                                   TextColor="#8A7280"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Feature Card 2 -->
+                    <Frame Grid.Column="1"
+                           BackgroundColor="White"
+                           CornerRadius="24"
+                           Padding="18"
+                           HasShadow="True"
+                           Shadow="{Shadow Brush=#E3B9D3,
+                                            Offset='0,4',
+                                            Radius=12,
+                                            Opacity=0.25}">
+
+                        <VerticalStackLayout Spacing="10">
+
+                            <Frame BackgroundColor="#EFE1EA"
+                                   CornerRadius="18"
+                                   HeightRequest="55"
+                                   WidthRequest="55"
+                                   Padding="12"
+                                   HorizontalOptions="Start"
+                                   BorderColor="Transparent">
+
+                                <Image Source="medical_report.png"/>
+                            </Frame>
+
+                            <Label Text="Medical Records"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   TextColor="#3A1F2E"/>
+
+                            <Label Text="Access prescriptions and health reports safely anytime."
+                                   FontSize="13"
+                                   TextColor="#8A7280"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom Button -->
+        <Grid Grid.Row="1"
+              Padding="25,10,25,35">
+            <Button Text="Get Started"
+        HeightRequest="62"
+        CornerRadius="30"
+        FontSize="20"
+        FontAttributes="Bold"
+        BackgroundColor="#7A2257"
+        TextColor="White"
+        Clicked="GetStarted_Clicked"
+        Shadow="{Shadow Brush=#4E1638,
+                         Offset='0,8',
+                         Radius=18,
+                         Opacity=0.40}"/>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="telemedicine.LoginPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FBF3F8"
+             Title="LoginPage">
+
+
+
+    <!-- STYLES -->
+    <ContentPage.Resources>
+
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="FontFamily" Value="Cambria"/>
+            <Setter Property="TextColor" Value="#111827"/>
+            <Setter Property="PlaceholderColor" Value="#9CA3AF"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <Grid>
+
+        <Grid RowDefinitions="Auto,*">
+
+            <!-- TOP DESIGN -->
+            <Grid HeightRequest="250"
+              Margin="0,65,0,0">
+
+                <!-- Main Circle -->
+                <Frame BackgroundColor="#F3E1EC"
+                   CornerRadius="110"
+                   HeightRequest="220"
+                   WidthRequest="220"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   HasShadow="False"
+                   BorderColor="Transparent"/>
+
+                <!-- Second Circle -->
+                <Frame BackgroundColor="#E6C3D9"
+                   CornerRadius="85"
+                   HeightRequest="170"
+                   WidthRequest="170"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Margin="0,25,0,0"
+                   HasShadow="False"
+                   BorderColor="Transparent"
+                   Opacity="0.7"/>
+
+                <!-- Logo -->
+                <Frame BackgroundColor="White"
+                   CornerRadius="65"
+                   HeightRequest="130"
+                   WidthRequest="130"
+                   Padding="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   HasShadow="True"
+                   Shadow="{Shadow Brush=#C77FA8,
+                                    Offset='0,6',
+                                    Radius=15,
+                                    Opacity=0.30}">
+
+                    <Image Source="bgmlog.png"
+                       Aspect="AspectFit"/>
+
+                </Frame>
+
+            </Grid>
+
+            <!-- MAIN CONTENT -->
+            <ScrollView Grid.Row="1">
+
+                <VerticalStackLayout Padding="30,30,30,35"
+                                 Spacing="20">
+
+                    <!-- HEADING -->
+                    <VerticalStackLayout Spacing="6">
+
+                        <Label Text="Welcome Back"
+                           FontSize="32"
+                           FontAttributes="Bold"
+                           TextColor="#7A2257"
+                           HorizontalTextAlignment="Center"/>
+
+                        <Label Text="Login to continue your healthcare journey"
+                           FontSize="15"
+                           TextColor="#8A7280"
+                           HorizontalTextAlignment="Center"/>
+
+                    </VerticalStackLayout>
+
+                    <!-- EMAIL -->
+                    <VerticalStackLayout Spacing="7"
+                                     Margin="0,15,0,0">
+
+                        <Label Text="Email Address"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#3A1F2E"/>
+
+                        <!-- SAME STYLE LIKE ADD PATIENT -->
+                        <Frame x:Name="EmailFrame"
+                           BackgroundColor="#FBF3F8"
+                           Padding="14,4"
+                           CornerRadius="10"
+                           BorderColor="#D9C3D1"
+                           HasShadow="False">
+
+                            <Entry x:Name="EmailEntry"
+       Placeholder="Enter your email"
+       Keyboard="Email"
+       Focused="Entry_Focused"
+       Unfocused="Entry_Unfocused"/>
+
+                        </Frame>
+
+                    </VerticalStackLayout>
+
+                    <!-- PASSWORD -->
+                    <VerticalStackLayout Spacing="7">
+
+                        <Label Text="Password"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#3A1F2E"/>
+
+                        <Frame x:Name="PasswordFrame"
+                           BackgroundColor="#FBF3F8"
+                           Padding="14,4"
+                           CornerRadius="10"
+                           BorderColor="#D9C3D1"
+                           HasShadow="False">
+
+                            <Entry x:Name="PasswordEntry"
+       Placeholder="Enter your password"
+       IsPassword="True"
+       Focused="Entry_Focused"
+       Unfocused="Entry_Unfocused"/>
+
+                        </Frame>
+
+                    </VerticalStackLayout>
+
+
+                    <Button x:Name="LoginButton"
+        Text="Login"
+        HeightRequest="60"
+        CornerRadius="30"
+        FontSize="19"
+        FontAttributes="Bold"
+        BackgroundColor="#7A2257"
+        TextColor="White"
+        Margin="0,40,0,0"
+        Clicked="LoginClicked"
+        Shadow="{Shadow Brush=#4E1638,
+                         Offset='0,8',
+                         Radius=18,
+                         Opacity=0.35}"/>
+
+                    <!-- SIGNUP -->
+                    <HorizontalStackLayout HorizontalOptions="Center"
+                                       Spacing="5"
+                                       Margin="0,12,0,0">
+
+                        <Label Text="Don't have an account?"
+                           FontSize="14"
+                           TextColor="#8A7280"/>
+
+                        <Label Text="Sign Up"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#7A2257"/>
+
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+
+            </ScrollView>
+
+
+        </Grid>
+
+        <Grid x:Name="LoadingOverlay"
+IsVisible="False"
+BackgroundColor="#80000000"
+ZIndex="999">
+
+            <ActivityIndicator
+  IsRunning="True"
+  Color="White"
+  WidthRequest="48"
+  HeightRequest="48"
+  HorizontalOptions="Center"
+  VerticalOptions="Center" />
+        </Grid>
+
+
+    </Grid>
+
+</ContentPage>

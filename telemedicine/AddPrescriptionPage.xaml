@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="telemedicine.AddPrescriptionPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FBF3F8"
+             Title="AddPrescriptionPage">
+
+    <!-- STYLES -->
+    <ContentPage.Resources>
+
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="FontFamily" Value="Cambria"/>
+            <Setter Property="TextColor" Value="#111827"/>
+            <Setter Property="PlaceholderColor" Value="#9CA3AF"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <Style TargetType="Editor">
+            <Setter Property="FontFamily" Value="Cambria"/>
+            <Setter Property="TextColor" Value="#111827"/>
+            <Setter Property="PlaceholderColor" Value="#9CA3AF"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+
+    <Grid>
+
+        <!-- MAIN CONTENT -->
+        <ScrollView>
+
+            <VerticalStackLayout Padding="20,55,20,120"
+                                 Spacing="22">
+
+                <!-- TOP HEADER -->
+                <Grid ColumnDefinitions="*,Auto">
+
+                    <!-- DATE -->
+                    <VerticalStackLayout Grid.Column="1"
+                     HorizontalOptions="End"
+                     VerticalOptions="Center"
+                     Spacing="0">
+
+                        <Label x:Name="DayLabel"
+           FontSize="14"
+           FontAttributes="Bold"
+           TextColor="#7A2257"
+           HorizontalTextAlignment="End"/>
+
+                        <Label x:Name="DateLabel"
+           FontSize="13"
+           TextColor="#6B7280"
+           HorizontalTextAlignment="End"/>
+
+                    </VerticalStackLayout>
+
+                </Grid>
+
+                <!-- PAGE TITLE -->
+                <VerticalStackLayout Spacing="4">
+
+                    <Label Text="Add Prescription"
+                           FontSize="30"
+                           FontAttributes="Bold"
+                           TextColor="#7A2257"/>
+
+                    <Label Text="Create and manage patient prescriptions"
+                           FontSize="15"
+                           TextColor="#6B7280"/>
+
+                </VerticalStackLayout>
+
+                <!-- CHOOSE PATIENT -->
+                <VerticalStackLayout Spacing="12">
+
+                    <Label Text="Select Patient"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#111827"/>
+
+                    <Button Text="Choose Patient"
+                            HeightRequest="58"
+                            CornerRadius="18"
+                            FontSize="17"
+                            FontAttributes="Bold"
+                            BackgroundColor="#7A2257"
+                            TextColor="White"
+                            Clicked="OpenPatientPopup"/>
+
+                </VerticalStackLayout>
+
+                <!-- SELECTED PATIENT -->
+                <Frame x:Name="SelectedPatientCard"
+                       IsVisible="False"
+                       BackgroundColor="#F5E6EF"
+                       CornerRadius="20"
+                       Padding="16"
+                       BorderColor="#E6C3D9"
+                       HasShadow="False">
+
+                    <Grid ColumnDefinitions="Auto,*"
+                          ColumnSpacing="14">
+
+                        <Frame HeightRequest="70"
+                               WidthRequest="70"
+                               CornerRadius="35"
+                               Padding="0"
+                               HasShadow="False"
+                               BorderColor="Transparent">
+
+                            <Image Source="patients.jpg"
+                                   Aspect="AspectFill"/>
+
+                        </Frame>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             Spacing="4"
+                                             VerticalOptions="Center">
+
+                            <Label x:Name="PatientNameLabel"
+                                   Text="John Smith"
+                                   FontSize="21"
+                                   FontAttributes="Bold"
+                                   TextColor="#111827"/>
+
+                            <Label x:Name="PatientInfoLabel"
+                                   Text="Male, 35 yrs"
+                                   FontSize="14"
+                                   TextColor="#6B7280"/>
+
+                            <Label x:Name="PatientPhoneLabel"
+                                   Text="+91 98765 43210"
+                                   FontSize="14"
+                                   TextColor="#6B7280"/>
+
+                        </VerticalStackLayout>
+
+                    </Grid>
+
+                </Frame>
+
+                <!-- WRITE PRESCRIPTION -->
+                <VerticalStackLayout Spacing="18">
+
+                    <Label Text="Write Prescription"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#111827"/>
+
+                    <!-- PRESCRIPTION INPUTS -->
+                    <VerticalStackLayout x:Name="PrescriptionContainer"
+                                         Spacing="14">
+
+                        <!-- DEFAULT INPUT -->
+                        <Frame BackgroundColor="#F5E6EF"
+                               BorderColor="#E6C3D9"
+                               CornerRadius="14"
+                               Padding="14,6"
+                               HasShadow="False">
+
+                            <Grid ColumnDefinitions="*,Auto"
+                                  ColumnSpacing="10">
+
+                                <Entry Placeholder="Enter medicine and dosage"
+                                       BackgroundColor="Transparent"
+                                       Focused="PrescriptionEntry_Focused"
+                                       Unfocused="PrescriptionEntry_Unfocused"/>
+
+                                <!-- DELETE ICON -->
+                                <!-- DELETE ICON -->
+                                <ImageButton Grid.Column="1"
+             Source="delete.png"
+             HeightRequest="22"
+             WidthRequest="22"
+             Padding="0"
+             BackgroundColor="Transparent"
+             Aspect="AspectFit"
+             Clicked="DeletePrescriptionField"/>
+
+                            </Grid>
+
+                        </Frame>
+
+                    </VerticalStackLayout>
+
+                    <!-- ADD MORE -->
+                    <Button Text="+ Add More Points"
+                            HeightRequest="52"
+                            CornerRadius="16"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            BackgroundColor="#F5E6EF"
+                            TextColor="#7A2257"
+                            Clicked="AddMorePrescriptionField"/>
+
+                </VerticalStackLayout>
+
+                <!-- NOTES -->
+                <VerticalStackLayout Spacing="8">
+
+                    <Label Text="Notes"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#111827"/>
+
+                    <Frame BackgroundColor="#F5E6EF"
+                           BorderColor="#E6C3D9"
+                           CornerRadius="16"
+                           Padding="14,10"
+                           HasShadow="False">
+
+                        <Editor x:Name="NotesEditor"
+        Placeholder="Write additional notes here..."
+        HeightRequest="120"
+        BackgroundColor="Transparent"/>
+
+                    </Frame>
+
+                </VerticalStackLayout>
+
+                <!-- SAVE BUTTON -->
+                <Button Text="Save Prescription"
+                        HeightRequest="60"
+                        CornerRadius="30"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        BackgroundColor="#7A2257"
+                        TextColor="White"
+                        Margin="0,10,0,20"
+                        Clicked="SavePrescription"
+                        Shadow="{Shadow Brush=#7A2257,
+                                         Offset='0,8',
+                                         Radius=18,
+                                         Opacity=0.35}"/>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <!-- PATIENT POPUP -->
+        <Grid x:Name="PatientPopup"
+              BackgroundColor="#804E1638"
+              IsVisible="False">
+
+            <Grid VerticalOptions="Center"
+                  HorizontalOptions="Center">
+
+                <Frame BackgroundColor="White"
+                       CornerRadius="26"
+                       Padding="22"
+                       WidthRequest="350"
+                       HasShadow="True">
+
+                    <VerticalStackLayout Spacing="18">
+
+                        <!-- HEADER -->
+                        <Grid ColumnDefinitions="*,Auto">
+
+                            <Label Text="Choose Patient"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="#111827"/>
+
+                            <Button Grid.Column="1"
+                                    Text="✕"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#111827"
+                                    FontSize="22"
+                                    Clicked="ClosePatientPopup"/>
+
+                        </Grid>
+
+                        <!-- SEARCH -->
+                        <Frame BackgroundColor="#F5E6EF"
+                               BorderColor="#E6C3D9"
+                               CornerRadius="14"
+                               Padding="14,6"
+                               HasShadow="False">
+
+                            <Entry Placeholder="Search patient"
+                                   BackgroundColor="Transparent"/>
+
+                        </Frame>
+
+                        <!-- PATIENT LIST -->
+                        <ScrollView HeightRequest="320">
+
+                            <VerticalStackLayout Spacing="14">
+
+                                <CollectionView x:Name="PatientCollection"
+                SelectionMode="None">
+
+                                    <CollectionView.ItemTemplate>
+
+                                        <DataTemplate>
+
+                                            <Frame BackgroundColor="#FBF3F8"
+                   BorderColor="#E6C3D9"
+                   CornerRadius="18"
+                   Padding="12"
+                   Margin="0,0,0,10"
+                   HasShadow="False">
+
+                                                <Grid ColumnDefinitions="Auto,*,Auto"
+                      ColumnSpacing="12">
+
+                                                    <!-- PATIENT ID -->
+                                                    <Frame HeightRequest="58"
+                           WidthRequest="58"
+                           CornerRadius="29"
+                           BackgroundColor="#7A2257"
+                           Padding="0"
+                           HasShadow="False">
+
+                                                        <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Spacing="0">
+
+                                                            <Label Text="ID"
+                                   FontSize="10"
+                                   TextColor="White"
+                                   HorizontalTextAlignment="Center"/>
+
+                                                            <Label Text="{Binding PatientId}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalTextAlignment="Center"/>
+
+                                                        </VerticalStackLayout>
+
+                                                    </Frame>
+
+                                                    <!-- DETAILS -->
+                                                    <VerticalStackLayout Grid.Column="1"
+                                         Spacing="2"
+                                         VerticalOptions="Center">
+
+                                                        <Label Text="{Binding PatientName}"
+                               FontSize="17"
+                               FontAttributes="Bold"
+                               TextColor="#111827"/>
+
+                                                        <Label FontSize="13"
+                               TextColor="#6B7280">
+
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding Gender}" />
+                                                                    <Span Text=" • " />
+                                                                    <Span Text="{Binding Disease}" />
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+
+                                                        </Label>
+
+                                                    </VerticalStackLayout>
+
+                                                    <!-- CHOOSE BUTTON -->
+                                                    <Button Grid.Column="2"
+        Text="Choose"
+        FontSize="13"
+        FontAttributes="Bold"
+        BackgroundColor="#7A2257"
+        TextColor="White"
+        CornerRadius="18"
+        HeightRequest="40"
+        WidthRequest="90"
+        CommandParameter="{Binding .}"
+        Clicked="ChoosePatient"/>
+
+                                                </Grid>
+
+                                            </Frame>
+
+                                        </DataTemplate>
+
+                                    </CollectionView.ItemTemplate>
+
+                                </CollectionView>
+                            </VerticalStackLayout>
+
+                        </ScrollView>
+
+                    </VerticalStackLayout>
+
+                </Frame>
+
+            </Grid>
+
+        </Grid>
+
+        <Grid x:Name="LoadingOverlay"
+IsVisible="False"
+BackgroundColor="#804E1638"
+ZIndex="999">
+
+            <ActivityIndicator
+  IsRunning="True"
+  Color="White"
+  WidthRequest="48"
+  HeightRequest="48"
+  HorizontalOptions="Center"
+  VerticalOptions="Center" />
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

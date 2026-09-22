@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:telemedicine.Components"
+             x:Class="telemedicine.HomePage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FBF3F8"
+             Title="HomePage">
+
+    <!-- GLOBAL STYLES -->
+    <ContentPage.Resources>
+
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid RowDefinitions="*,Auto">
+
+            <!-- MAIN CONTENT -->
+            <ScrollView Grid.Row="0">
+
+                <VerticalStackLayout Padding="20,55,20,20"
+                                 Spacing="22">
+
+                    <!-- TOP PROFILE SECTION -->
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+
+                        <!-- PROFILE IMAGE -->
+                        <Frame HeightRequest="65"
+       WidthRequest="65"
+       CornerRadius="32"
+       Padding="0"
+       HasShadow="True"
+       BorderColor="White"
+       BackgroundColor="White"
+       Shadow="{Shadow Brush=#C77FA8,
+                        Offset='0,4',
+                        Radius=12,
+                        Opacity=0.30}">
+
+                            <Image x:Name="DoctorImage"
+           Source="doctorprofile.jpg"
+           Aspect="AspectFill"/>
+                        </Frame>
+
+                        <!-- NAME & ROLE -->
+                        <VerticalStackLayout Grid.Column="1"
+                     Margin="15,5,0,0"
+                     Spacing="2">
+
+                            <Label x:Name="DoctorNameLabel"
+           Text="Doctor Name"
+           FontSize="22"
+           FontAttributes="Bold"
+           TextColor="#111827"/>
+
+                            <Label x:Name="DepartmentLabel"
+           Text="Department"
+           FontSize="14"
+           TextColor="#6B7280"/>
+
+                        </VerticalStackLayout>
+
+                        <!-- DATE -->
+                        <Grid Grid.Column="2">
+
+                            <!-- DATE FRAME -->
+                            <Frame BackgroundColor="White"
+           CornerRadius="15"
+           Padding="14,10"
+           BorderColor="#E5E7EB"
+           HasShadow="False"
+           VerticalOptions="Start">
+
+                                <VerticalStackLayout Spacing="0">
+
+                                    <Label x:Name="DayNumberLabel"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   TextColor="#7A2257"/>
+
+                                    <Label x:Name="DayNameLabel"
+                   FontSize="12"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   TextColor="#6B7280"/>
+
+                                </VerticalStackLayout>
+
+                            </Frame>
+
+                            <!-- HIDDEN DATE PICKER -->
+                            <DatePicker x:Name="HomeDatePicker"
+                Opacity="0.01"
+                BackgroundColor="Transparent"
+                DateSelected="HomeDatePicker_DateSelected"/>
+
+                        </Grid>
+
+                    </Grid>
+
+                    <!-- QUICK STATS -->
+                    <Grid ColumnDefinitions="*,*"
+                      ColumnSpacing="15" 
+                      Margin="0,20,0,0">
+
+                        <!-- TODAY MEETING -->
+                        <Frame BackgroundColor="#7A2257"
+                           CornerRadius="20"
+                           Padding="18"
+                           HasShadow="False">
+
+                            <VerticalStackLayout Spacing="6">
+
+                                <Image Source="meeting-white.png"
+                                   WidthRequest="28"
+                                   HeightRequest="28"
+                                   HorizontalOptions="Start"/>
+
+                                <Label x:Name="MeetingCountLabel"
+       Text="0 Meetings"
+       FontSize="22"
+       FontAttributes="Bold"
+       TextColor="White"/>
+
+                                <Label Text="Today's Schedule"
+                                   FontSize="14"
+                                   TextColor="#F0DCE9"/>
+
+                            </VerticalStackLayout>
+
+                        </Frame>
+
+                        <!-- NEW PATIENT -->
+                        <Frame Grid.Column="1"
+                           BackgroundColor="White"
+                           CornerRadius="20"
+                           Padding="18"
+                           BorderColor="#E5E7EB"
+                           HasShadow="True"
+                           Shadow="{Shadow Brush=#E3B9D3,
+                                            Offset='0,3',
+                                            Radius=10,
+                                            Opacity=0.15}">
+
+                            <VerticalStackLayout Spacing="6">
+
+                                <Image Source="patient-blue.png"
+                                   WidthRequest="28"
+                                   HeightRequest="28"
+                                   HorizontalOptions="Start"/>
+
+                                <Label x:Name="PatientCountLabel"
+       Text="0 Patients"
+       FontSize="22"
+       FontAttributes="Bold"
+       TextColor="#111827"/>
+
+                                <Label Text="Handled Patient's"
+                                   FontSize="14"
+                                   TextColor="#6B7280"/>
+
+                            </VerticalStackLayout>
+
+                        </Frame>
+
+                    </Grid>
+
+                    <!-- TODAY MEETING HEADER -->
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <Label Text="Today's Meetings"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#111827"/>
+
+                        <Image Grid.Column="1"
+                           Source="calendar.png"
+                           WidthRequest="24"
+                           HeightRequest="24"/>
+
+                    </Grid>
+
+                    <CollectionView x:Name="MeetingCollection">
+
+                        <CollectionView.ItemTemplate>
+
+                            <DataTemplate>
+
+                                <Frame BackgroundColor="White"
+       CornerRadius="20"
+       Padding="16"
+       Margin="0,0,0,12"
+       BorderColor="#E5E7EB"
+       HasShadow="True">
+
+                                    <Grid ColumnDefinitions="Auto,*,Auto"
+          ColumnSpacing="15">
+
+                                        <!-- APPOINTMENT ID -->
+                                        <Frame WidthRequest="58"
+               HeightRequest="58"
+               CornerRadius="29"
+               Padding="0"
+               BackgroundColor="#7A2257"
+               HasShadow="False"
+               VerticalOptions="Center">
+
+                                            <VerticalStackLayout
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Spacing="0">
+
+                                                <Label Text="#"
+                       FontFamily="Cambria"
+                       FontSize="10"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
+
+                                                <Label Text="{Binding AppointmentId}"
+                       FontFamily="Cambria"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
+
+                                            </VerticalStackLayout>
+
+                                        </Frame>
+
+                                        <!-- DETAILS -->
+                                        <VerticalStackLayout Grid.Column="1"
+                             VerticalOptions="Center"
+                             Spacing="5">
+
+                                            <Label Text="{Binding PatientName}"
+                   FontFamily="Cambria"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="#111827"/>
+
+                                            <HorizontalStackLayout Spacing="5">
+
+
+
+                                                <Label Text="{Binding Date,StringFormat='{0:dd MMM yyyy}'}"
+                       FontFamily="Cambria"
+                       FontSize="13"
+                       TextColor="#6B7280"/>
+
+                                            </HorizontalStackLayout>
+
+                                            <Frame BackgroundColor="#FEF3C7"
+                   CornerRadius="8"
+                   Padding="8,2"
+                   HasShadow="False"
+                   HorizontalOptions="Start">
+
+                                                <Label Text="{Binding Status}"
+                       FontFamily="Cambria"
+                       FontSize="11"
+                       FontAttributes="Bold"
+                       TextColor="#D97706"/>
+
+                                            </Frame>
+
+                                        </VerticalStackLayout>
+
+                                        <!-- RIGHT SIDE -->
+                                        <VerticalStackLayout Grid.Column="2"
+                             Spacing="8"
+                             HorizontalOptions="End"
+                             VerticalOptions="Center">
+
+                                            <!-- TIME TOP RIGHT -->
+                                            <HorizontalStackLayout HorizontalOptions="End"
+                                   Spacing="3">
+
+                                                <Image Source="clock.png"
+                       WidthRequest="14"
+                       HeightRequest="14"/>
+
+                                                <Label Text="{Binding Date,StringFormat='{0:hh:mm tt}'}"
+                       FontFamily="Cambria"
+                       FontSize="13"
+                       FontAttributes="Bold"
+                       TextColor="#7A2257"/>
+
+                                            </HorizontalStackLayout>
+
+                                            <!-- JOIN BUTTON -->
+                                            <Button Text="Join"
+                    WidthRequest="90"
+                    HeightRequest="42"
+                    CornerRadius="21"
+                    FontFamily="Cambria"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    BackgroundColor="#10B981"
+                    TextColor="White"
+                    Clicked="JoinMeetingClicked"/>
+
+                                        </VerticalStackLayout>
+
+                                    </Grid>
+
+                                </Frame>
+
+                            </DataTemplate>
+
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+
+
+                    <!-- NEW PATIENTS HEADER -->
+                    <Grid ColumnDefinitions="*,Auto"
+                      Margin="0,10,0,0">
+
+                        <Label Text="Patient's Handled"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#111827"/>
+
+                        <Frame Grid.Column="1"
+                           BackgroundColor="#FBBF24"
+                           CornerRadius="12"
+                           Padding="10,3"
+                           HasShadow="False">
+
+                            <Label Text="NEW"
+                               FontSize="12"
+                               FontAttributes="Bold"
+                               TextColor="White"/>
+                        </Frame>
+
+                    </Grid>
+
+                    <CollectionView x:Name="PatientCollection">
+
+                        <CollectionView.ItemTemplate>
+
+                            <DataTemplate>
+
+                                <Frame BackgroundColor="White"
+       CornerRadius="20"
+       Padding="16"
+       Margin="0,0,0,12"
+       BorderColor="#E5E7EB"
+       HasShadow="True">
+
+                                    <Grid ColumnDefinitions="Auto,*,Auto"
+          ColumnSpacing="15">
+
+                                        <!-- PATIENT ID -->
+                                        <Frame WidthRequest="58"
+               HeightRequest="58"
+               CornerRadius="29"
+               Padding="0"
+               BackgroundColor="#7A2257"
+               HasShadow="False"
+               VerticalOptions="Center">
+
+                                            <VerticalStackLayout
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Spacing="0">
+
+                                                <Label Text="#"
+                       FontFamily="Cambria"
+                       FontSize="10"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
+
+                                                <Label Text="{Binding PatientId}"
+                       FontFamily="Cambria"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
+
+                                            </VerticalStackLayout>
+
+                                        </Frame>
+
+                                        <!-- PATIENT DETAILS -->
+                                        <VerticalStackLayout Grid.Column="1"
+                             Spacing="4"
+                             VerticalOptions="Center">
+
+                                            <!-- NAME -->
+                                            <Label Text="{Binding PatientName}"
+                   FontFamily="Cambria"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="#111827"/>
+
+                                            <!-- PHONE -->
+                                            <HorizontalStackLayout Spacing="5">
+
+
+
+                                                <Label Text="{Binding Phone}"
+                       FontFamily="Cambria"
+                       FontSize="13"
+                       TextColor="#6B7280"/>
+
+                                            </HorizontalStackLayout>
+
+                                            <!-- DISEASE -->
+                                            <HorizontalStackLayout Spacing="5">
+
+
+
+                                                <Label Text="{Binding Disease}"
+                       FontFamily="Cambria"
+                       FontSize="13"
+                       TextColor="#6B7280"/>
+
+                                            </HorizontalStackLayout>
+
+                                        </VerticalStackLayout>
+
+                                        <!-- STATUS -->
+                                        <Frame Grid.Column="2"
+               BackgroundColor="#DCFCE7"
+               CornerRadius="10"
+               Padding="10,5"
+               HasShadow="False"
+               VerticalOptions="Center">
+
+                                            <Label Text="{Binding Status}"
+                   FontFamily="Cambria"
+                   FontSize="12"
+                   FontAttributes="Bold"
+                   TextColor="#16A34A"/>
+
+                                        </Frame>
+
+                                    </Grid>
+
+                                </Frame>
+
+                            </DataTemplate>
+
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+
+                </VerticalStackLayout>
+
+            </ScrollView>
+
+            <!-- FOOTER -->
+            <components:FooterView  x:Name="Footer" Grid.Row="1"/>
+
+        </Grid>
+
+        <Grid x:Name="LoadingOverlay"
+IsVisible="False"
+BackgroundColor="#80000000"
+ZIndex="999">
+
+            <ActivityIndicator
+  IsRunning="True"
+  Color="White"
+  WidthRequest="48"
+  HeightRequest="48"
+  HorizontalOptions="Center"
+  VerticalOptions="Center" />
+        </Grid>
+
+    </Grid>
+
+
+</ContentPage>

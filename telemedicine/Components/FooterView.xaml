@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="telemedicine.Components.FooterView"
+             HeightRequest="75"
+             BackgroundColor="White">
+
+    <Grid ColumnDefinitions="*,*,*,*,*"
+          HeightRequest="75"
+          BackgroundColor="White">
+
+        <!-- Top Border -->
+        <BoxView Grid.ColumnSpan="5"
+                 HeightRequest="1"
+                 BackgroundColor="#E5E7EB"
+                 VerticalOptions="Start"/>
+
+        <!-- HOME -->
+        <VerticalStackLayout Grid.Column="0"
+                             x:Name="HomeTab"
+                             Spacing="3"
+                             Padding="5"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+
+            <VerticalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="GotoHome"/>
+            </VerticalStackLayout.GestureRecognizers>
+
+            <Image x:Name="HomeIcon"
+                   Source="home_active.png"
+                   WidthRequest="24"
+                   HeightRequest="24"/>
+
+            <Label x:Name="HomeLabel"
+                   Text="Home"
+                   FontFamily="Cambria"
+                   FontSize="11"
+                   FontAttributes="Bold"
+                   TextColor="#1565C0"
+                   HorizontalTextAlignment="Center"/>
+        </VerticalStackLayout>
+
+
+        <!-- PATIENTS -->
+        <VerticalStackLayout Grid.Column="1"
+                             x:Name="PatientsTab"
+                             Spacing="3"
+                             Padding="5"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+
+            <VerticalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="GotoPatients"/>
+            </VerticalStackLayout.GestureRecognizers>
+
+            <Image x:Name="PatientsIcon"
+                   Source="meeting.png"
+                   WidthRequest="24"
+                   HeightRequest="24"/>
+
+            <Label x:Name="PatientsLabel"
+                   Text="Appointment"
+                   FontFamily="Cambria"
+                   FontSize="11"
+                   FontAttributes="Bold"
+                   TextColor="#6B7280"
+                   HorizontalTextAlignment="Center"/>
+        </VerticalStackLayout>
+
+        <!-- MEETING -->
+        <VerticalStackLayout Grid.Column="2"
+                      x:Name="MeetingTab"
+                      Spacing="3"
+                      Padding="5"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center">
+
+            <VerticalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="Logout"/>
+            </VerticalStackLayout.GestureRecognizers>
+
+            <Image x:Name="MeetingIcon"
+            Source="logout.png"
+            WidthRequest="24"
+            HeightRequest="24"/>
+
+            <Label x:Name="MeetingLabel"
+            Text="Logout"
+            FontFamily="Cambria"
+            FontSize="11"
+            FontAttributes="Bold"
+            TextColor="#6B7280"
+            HorizontalTextAlignment="Center"/>
+        </VerticalStackLayout>
+
+
+        <!-- E-PRESCRIPTION -->
+        <VerticalStackLayout Grid.Column="3"
+                             x:Name="PrescriptionTab"
+                             Spacing="3"
+                             Padding="5"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+
+            <VerticalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="GotoPrescription"/>
+            </VerticalStackLayout.GestureRecognizers>
+
+            <Image x:Name="PrescriptionIcon"
+                   Source="prescription.png"
+                   WidthRequest="24"
+                   HeightRequest="24"/>
+
+            <Label x:Name="PrescriptionLabel"
+                   Text="E-Prescription"
+                   FontFamily="Cambria"
+                   FontSize="10"
+                   FontAttributes="Bold"
+                   TextColor="#6B7280"
+                   HorizontalTextAlignment="Center"/>
+        </VerticalStackLayout>
+
+
+       
+
+
+        <!-- PROFILE -->
+        <VerticalStackLayout Grid.Column="4"
+                             x:Name="ProfileTab"
+                             Spacing="3"
+                             Padding="5"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+
+            <VerticalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="GotoProfile"/>
+            </VerticalStackLayout.GestureRecognizers>
+
+            <Image x:Name="ProfileIcon"
+                   Source="profile.png"
+                   WidthRequest="24"
+                   HeightRequest="24"/>
+
+            <Label x:Name="ProfileLabel"
+                   Text="Profile"
+                   FontFamily="Cambria"
+                   FontSize="11"
+                   FontAttributes="Bold"
+                   TextColor="#6B7280"
+                   HorizontalTextAlignment="Center"/>
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentView>

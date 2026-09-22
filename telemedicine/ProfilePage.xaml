@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:telemedicine.Components"
+             x:Class="telemedicine.ProfilePage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FBF3F8"
+             Title="ProfilePage">
+
+    <!-- STYLES -->
+    <ContentPage.Resources>
+
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <!-- MAIN LAYOUT -->
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- PAGE CONTENT -->
+        <ScrollView Grid.Row="0">
+
+            <VerticalStackLayout Spacing="20"
+                                 Padding="0,0,0,20">
+
+                <!-- TOP HEADER -->
+
+                <Grid HeightRequest="250" Margin="0,30,0,0">
+
+                    <!-- Main Background Circle -->
+                    <Frame BackgroundColor="#F3E1EC"
+           CornerRadius="120"
+           HeightRequest="230"
+           WidthRequest="230"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"
+           HasShadow="False"
+           BorderColor="Transparent"/>
+
+                    <!-- Secondary Circle -->
+                    <Frame BackgroundColor="#E6C3D9"
+           CornerRadius="90"
+           HeightRequest="180"
+           WidthRequest="180"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"
+           Margin="0,30,0,0"
+           HasShadow="False"
+           BorderColor="Transparent"
+           Opacity="0.7"/>
+
+                    <!-- PROFILE IMAGE -->
+                    <Frame HeightRequest="130"
+           WidthRequest="130"
+           CornerRadius="65"
+           Padding="0"
+           IsClippedToBounds="True"
+           BackgroundColor="Transparent"
+           BorderColor="White"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"
+           HasShadow="True"
+           Shadow="{Shadow Brush=#E3B9D3,
+                            Offset='0,6',
+                            Radius=16,
+                            Opacity=0.28}">
+
+                        <Image x:Name="DoctorImage"
+       Source="doctor.jpg"
+       Aspect="AspectFill"
+       HeightRequest="130"
+       WidthRequest="130"/>
+
+                    </Frame>
+
+                </Grid>
+
+                <!-- PROFILE CONTENT -->
+                <VerticalStackLayout VerticalOptions="Center"
+                                     HorizontalOptions="Center"
+                                     Spacing="10"
+                                     Margin="0,-10,0,0">
+
+                    <!-- DOCTOR NAME -->
+                    <Label x:Name="DoctorNameLabel"
+       Text="Dr. John Mathew"
+       FontSize="30"
+       FontAttributes="Bold"
+       TextColor="#7A2257"
+       HorizontalTextAlignment="Center"/>
+
+                    <!-- ROLE -->
+                    <Label x:Name="DepartmentLabel"
+       Text="Cardiologist Specialist"
+       FontSize="16"
+       FontAttributes="Bold"
+       TextColor="#6B7280"
+       HorizontalTextAlignment="Center"/>
+
+                </VerticalStackLayout>
+
+                <!-- DETAILS SECTION -->
+                <VerticalStackLayout Padding="25,0"
+                                     Spacing="22">
+
+                    <!-- PROFESSIONAL DETAILS -->
+                    <VerticalStackLayout Spacing="18">
+
+                        <Label Text="Professional Details"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               TextColor="#111827"/>
+
+                        <!-- LICENSE -->
+
+                        <Grid ColumnDefinitions="55,*"
+Padding="0,8">
+
+                            <Frame BackgroundColor="#F5E6EF"
+     HeightRequest="46"
+     WidthRequest="46"
+     CornerRadius="23"
+     Padding="10"
+     HasShadow="False">
+
+                                <Image Source="status.png"
+         HeightRequest="22"
+         WidthRequest="22"/>
+
+                            </Frame>
+
+                            <VerticalStackLayout Grid.Column="1"
+                   Spacing="2">
+
+                                <Label Text="Status"
+         FontSize="13"
+         TextColor="#6B7280"/>
+
+                                <Frame BackgroundColor="#DCFCE7"
+         CornerRadius="10"
+         Padding="10,4"
+         HorizontalOptions="Start"
+         HasShadow="False">
+
+                                    <Label x:Name="StatusLabel"
+             FontSize="13"
+             FontAttributes="Bold"
+             TextColor="#16A34A"/>
+
+                                </Frame>
+
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+
+                        <!-- EXPERIENCE -->
+                        <Grid ColumnDefinitions="55,*"
+                              Padding="0,8">
+
+                            <Frame BackgroundColor="#F5E6EF"
+                                   HeightRequest="46"
+                                   WidthRequest="46"
+                                   CornerRadius="23"
+                                   Padding="10"
+                                   HasShadow="False">
+
+                                <Image Source="experience.png"
+                                       HeightRequest="22"
+                                       WidthRequest="22"/>
+
+                            </Frame>
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="2">
+
+                                <Label Text="Experience"
+                                       FontSize="13"
+                                       TextColor="#6B7280"/>
+
+                                <Label x:Name="ExperienceLabel"
+       Text=""
+       FontSize="17"
+       FontAttributes="Bold"
+       TextColor="#111827"/>
+
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                        <!-- HOSPITAL -->
+                        <Grid ColumnDefinitions="55,*"
+                              Padding="0,8">
+
+                            <Frame BackgroundColor="#F5E6EF"
+                                   HeightRequest="46"
+                                   WidthRequest="46"
+                                   CornerRadius="23"
+                                   Padding="10"
+                                   HasShadow="False">
+
+                                <Image Source="hospital.png"
+                                       HeightRequest="22"
+                                       WidthRequest="22"/>
+
+                            </Frame>
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="2">
+
+                                <Label Text="Hospital Name"
+                                       FontSize="13"
+                                       TextColor="#6B7280"/>
+
+                                <Label x:Name="HospitalLabel"
+       Text=""
+       FontSize="17"
+       FontAttributes="Bold"
+       TextColor="#111827"/>
+
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                        <!-- ADDRESS -->
+                        <Grid ColumnDefinitions="55,*"
+                              Padding="0,8">
+
+                            <Frame BackgroundColor="#F5E6EF"
+                                   HeightRequest="46"
+                                   WidthRequest="46"
+                                   CornerRadius="23"
+                                   Padding="10"
+                                   HasShadow="False"
+                                   VerticalOptions="Start">
+
+                                <Image Source="location.png"
+                                       HeightRequest="22"
+                                       WidthRequest="22"/>
+
+                            </Frame>
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="2">
+
+                                <Label Text="Hospital Address"
+                                       FontSize="13"
+                                       TextColor="#6B7280"/>
+
+                                <Label x:Name="AddressLabel"
+       Text=""
+       FontSize="16"
+       TextColor="#111827"/>
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                        <Grid ColumnDefinitions="55,*"
+      Padding="0,8">
+
+                            <Frame BackgroundColor="#F5E6EF"
+           HeightRequest="46"
+           WidthRequest="46"
+           CornerRadius="23"
+           Padding="10"
+           HasShadow="False">
+
+                                <Image Source="phone.png"
+               HeightRequest="22"
+               WidthRequest="22"/>
+
+                            </Frame>
+
+                            <VerticalStackLayout Grid.Column="1"
+                         Spacing="2">
+
+                                <Label Text="Phone Number"
+               FontSize="13"
+               TextColor="#6B7280"/>
+
+                                <Label x:Name="PhoneLabel"
+               FontSize="17"
+               FontAttributes="Bold"
+               TextColor="#111827"/>
+
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                        <Grid ColumnDefinitions="55,*"
+      Padding="0,8">
+
+                            <Frame BackgroundColor="#F5E6EF"
+           HeightRequest="46"
+           WidthRequest="46"
+           CornerRadius="23"
+           Padding="10"
+           HasShadow="False">
+
+                                <Image Source="star.png"
+               HeightRequest="22"
+               WidthRequest="22"/>
+
+                            </Frame>
+
+                            <VerticalStackLayout Grid.Column="1"
+                         Spacing="2">
+
+                                <Label Text="Ratings"
+               FontSize="13"
+               TextColor="#6B7280"/>
+
+                                <Label x:Name="RatingsLabel"
+               FontSize="17"
+               FontAttributes="Bold"
+               TextColor="#111827"/>
+
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                        <Grid ColumnDefinitions="55,*"
+      Padding="0,8">
+
+                            <Frame BackgroundColor="#F5E6EF"
+           HeightRequest="46"
+           WidthRequest="46"
+           CornerRadius="23"
+           Padding="10"
+           HasShadow="False">
+
+                                <Image Source="success.png"
+               HeightRequest="22"
+               WidthRequest="22"/>
+
+                            </Frame>
+
+                            <VerticalStackLayout Grid.Column="1"
+                         Spacing="2">
+
+                                <Label Text="Success Rate"
+               FontSize="13"
+               TextColor="#6B7280"/>
+
+                                <Label x:Name="SuccessRateLabel"
+               FontSize="17"
+               FontAttributes="Bold"
+               TextColor="#111827"/>
+
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+
+
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <!-- FOOTER -->
+        <components:FooterView x:Name="Footer" Grid.Row="1"/>
+
+    </Grid>
+
+</ContentPage>

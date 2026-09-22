@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:telemedicine.Components"
+             x:Class="telemedicine.MeetingPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F5F9FF"
+             Title="MeetingPage">
+
+    <!-- STYLES -->
+    <ContentPage.Resources>
+
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Cambria"/>
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="FontFamily" Value="Cambria"/>
+            <Setter Property="TextColor" Value="#111827"/>
+            <Setter Property="PlaceholderColor" Value="#9CA3AF"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- MAIN CONTENT -->
+        <ScrollView Grid.Row="0">
+
+            <VerticalStackLayout Padding="25,60,25,120"
+                                 Spacing="28">
+
+                <!-- TOP ICON -->
+                <VerticalStackLayout HorizontalOptions="Center"
+                                     Spacing="10">
+
+                    <Frame HeightRequest="120"
+                           WidthRequest="120"
+                           CornerRadius="30"
+                           Padding="20"
+                           BackgroundColor="#E8F1FF"
+                           BorderColor="#D6E4FF"
+                           HasShadow="True"
+                           Shadow="{Shadow Brush=#BFDBFE,
+                                            Offset='0,6',
+                                            Radius=18,
+                                            Opacity=0.30}">
+
+                        <Image Source="meetinglink.png"
+                               Aspect="AspectFit"/>
+
+                    </Frame>
+
+                </VerticalStackLayout>
+
+                <!-- GENERATE BUTTON -->
+                <Button Text="Generate Meet Link"
+                        HeightRequest="60"
+                        CornerRadius="18"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        BackgroundColor="#1565C0"
+                        TextColor="White"
+                        Clicked="GenerateMeetingLink"
+                        Shadow="{Shadow Brush=#1565C0,
+                                         Offset='0,8',
+                                         Radius=18,
+                                         Opacity=0.35}"/>
+
+                <!-- LINK CARD -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="24"
+                       Padding="20"
+                       BorderColor="#ECECEC"
+                       HasShadow="True"
+                       Shadow="{Shadow Brush=#D6E4FF,
+                                        Offset='0,4',
+                                        Radius=12,
+                                        Opacity=0.15}">
+
+                    <VerticalStackLayout Spacing="20">
+
+                        <!-- TITLE -->
+                        <Label Text="Generated Meeting Link"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#111827"/>
+
+                        <!-- LINK BOX -->
+                        <Frame BackgroundColor="#F8FAFC"
+                               BorderColor="#D1D5DB"
+                               CornerRadius="14"
+                               Padding="12,10"
+                               HasShadow="False">
+
+                            <Grid ColumnDefinitions="*,Auto"
+                                  ColumnSpacing="10">
+
+                                <!-- GENERATED LINK -->
+                                <Entry x:Name="MeetingLinkEntry"
+                                       Text="https://telemedmeet.com/abc123"
+                                       FontSize="18"
+                                       IsReadOnly="True"
+                                       BackgroundColor="Transparent"
+                                       VerticalOptions="Center"/>
+
+                                <!-- COPY BUTTON -->
+                                <Button Grid.Column="1"
+                                        Text="Copy"
+                                        FontSize="13"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="#E8F1FF"
+                                        TextColor="#1565C0"
+                                        CornerRadius="10"
+                                        HeightRequest="40"
+                                        WidthRequest="80"
+                                        Clicked="CopyMeetingLink"/>
+
+                            </Grid>
+
+                        </Frame>
+
+                        <!-- OPEN MEETING -->
+                        <Button Text="Join Meeting"
+                                HeightRequest="56"
+                                CornerRadius="16"
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                BackgroundColor="#10B981"
+                                TextColor="White"
+                                Clicked="JoinMeeting"
+                                Shadow="{Shadow Brush=#10B981,
+                                                 Offset='0,6',
+                                                 Radius=14,
+                                                 Opacity=0.30}"/>
+
+                        <Grid ColumnDefinitions="*,*"
+      ColumnSpacing="14">
+
+                            <!-- WHATSAPP BUTTON -->
+                            <Button Grid.Column="0"
+            Text=" WhatsApp"
+            FontSize="15"
+            FontAttributes="Bold"
+            BackgroundColor="#25D366"
+            TextColor="White"
+            CornerRadius="16"
+            HeightRequest="56"
+            Padding="10,0"
+            ImageSource="whatsapp.png"
+            ContentLayout="Left,8"
+            Clicked="ShareWhatsApp"/>
+
+                            <!-- EMAIL BUTTON -->
+                            <Button Grid.Column="1"
+            Text=" Email"
+            FontSize="15"
+            FontAttributes="Bold"
+            BackgroundColor="#1565C0"
+            TextColor="White"
+            CornerRadius="16"
+            HeightRequest="56"
+            Padding="10,0"
+            ImageSource="gmail.png"
+            ContentLayout="Left,8"
+            Clicked="ShareEmail"/>
+
+                        </Grid>
+
+                    </VerticalStackLayout>
+
+                </Frame>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <!-- FOOTER -->
+        <components:FooterView Grid.Row="1"/>
+
+    </Grid>
+
+</ContentPage>
