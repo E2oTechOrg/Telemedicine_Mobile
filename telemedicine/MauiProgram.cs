@@ -31,6 +31,16 @@ namespace telemedicine
             {
                 handler.PlatformView.Background = null;
             });
+
+            // 🎥 Grant camera/mic permission requests inside WebView + hide wake-lock toast
+            WebViewHandler.Mapper.AppendToMapping("CustomWebChrome", (handler, view) =>
+            {
+                handler.PlatformView.SetWebChromeClient(new telemedicine.Platforms.Android.CustomWebChromeClient());
+                handler.PlatformView.SetWebViewClient(new telemedicine.Platforms.Android.CustomWebViewClient());
+                handler.PlatformView.Settings.JavaScriptEnabled = true;
+                handler.PlatformView.Settings.MediaPlaybackRequiresUserGesture = false;
+                handler.PlatformView.Settings.DomStorageEnabled = true;
+            });
 #endif
 
 #if DEBUG

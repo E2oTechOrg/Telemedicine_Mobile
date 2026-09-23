@@ -34,12 +34,18 @@ namespace telemedicine;
 public class MainActivity : MauiAppCompatActivity
 {
     const int NotificationPermissionRequestCode = 1001;
+    const int MediaPermissionRequestCode = 1002;
 
     protected override void OnCreate(Bundle? savedInstanceState)
     {
         base.OnCreate(savedInstanceState);
 
+#if DEBUG
+        Android.Webkit.WebView.SetWebContentsDebuggingEnabled(true);
+#endif
+
         RequestNotificationPermission();
+        RequestMediaPermissions();
 
         HandleIntent(Intent);
     }
@@ -73,12 +79,25 @@ public class MainActivity : MauiAppCompatActivity
             {
                 ActivityCompat.RequestPermissions(
                     this,
-                    new[]
-                    {
-                        Manifest.Permission.PostNotifications
-                    },
+                    new[] { Manifest.Permission.PostNotifications },
                     NotificationPermissionRequestCode);
             }
+        }
+    }
+
+    private void RequestMediaPermissions()
+    {
+        var permissionsNeeded = new List<string>();
+
+        if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.Camera) != Permission.Granted)
+            permissionsNeeded.Add(Manifest.Permission.Camera);
+
+        if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.RecordAudio) != Permission.Granted)
+            permissionsNeeded.Add(Manifest.Permission.RecordAudio);
+
+        if (permissionsNeeded.Count > 0)
+        {
+            ActivityCompat.RequestPermissions(this, permissionsNeeded.ToArray(), MediaPermissionRequestCode);
         }
     }
 }

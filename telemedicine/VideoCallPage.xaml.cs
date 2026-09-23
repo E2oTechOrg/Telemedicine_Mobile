@@ -1,3 +1,5 @@
+using Microsoft.Maui.Devices;
+
 namespace telemedicine;
 
 public partial class VideoCallPage : ContentPage
@@ -11,6 +13,18 @@ public partial class VideoCallPage : ContentPage
             {
                 Url = meetingUrl
             };
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        DeviceDisplay.Current.KeepScreenOn = true;
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        DeviceDisplay.Current.KeepScreenOn = false;
     }
 
     private async void CloseMeeting(
