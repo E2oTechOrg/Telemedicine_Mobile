@@ -262,6 +262,13 @@ public partial class AppointmentPage : ContentPage
             await Navigation.PushAsync(
                 new VideoCallPage(
                     appointment.MeetingLink));
+
+            System.Diagnostics.Debug.WriteLine($"MEETING URL >>> {appointment.MeetingLink}");
+
+            await Navigation.PushAsync(
+                new VideoCallPage(
+                    appointment.MeetingLink));
+
         }
         catch (Exception ex)
         {
